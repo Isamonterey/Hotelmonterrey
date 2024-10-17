@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Monterey</title>
+    <style>
+        .service-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.service-item:nth-child(odd) {
+    flex-direction: row-reverse;
+}
+
+.service-text {
+    flex: 1;
+    padding: 0 40px;
+}
+
+
+    .service-image img {
+    width: 100%; 
+    height: auto;
+    max-width: 500px; /* Tamaño máximo */
+    min-width: 500px;
+    min-height: 400px;
+    max-height: 400px; /* Altura máxima */
+    object-fit: cover; /* Ajustar la imagen sin distorsión */
+}
+}
+        .contact-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #f9f9f9;
+}
+
+.contact-info {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.social-media {
+  flex: 1;
+}
+
+.social-media a {
+  display: block;
+  color: #333;
+  text-decoration: none;
+  margin-bottom: 10px;
+}
+
+.social-media a:hover {
+  color: #007bff;
+}
+
+.map {
+  margin-top: 20px;
+}
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+        main {
+            padding: 20px;
+        }
+        .content {
+            margin: 20px 0;
+        }
+        .hidden {
+            display: none;
+        }
+        h1 {
+            color: #2E8B57; /* Verde */
+        }
+        h2 {
+            color: #4682B4; /* Azul */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px; /* Espacio entre título y contenido */
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        button {
+            background-color: #2E8B57; /* Verde */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1e6b47;
+        }
+        .social-icons img {
+            width: 32px;
+            margin-right: 10px;
+        }
+        .location-wrapper {
+            display: flex;
+            flex-direction: column; /* Mostrar contenido uno debajo del otro */
+            align-items: flex-start; /* Alinear a la izquierda */
+        }
+        #previewModal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+        #previewModal .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 700px; /* Ajustar tamaño máximo del modal */
+        }
+        #previewModal .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        #previewModal .close:hover,
+        #previewModal .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        #previewModal img {
+            width: 100%; /* Ajustar la imagen al tamaño del modal */
+            height: auto; /* Mantener la proporción de la imagen */
+        }
+        .room-card {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #fff;
+            flex: 1;
+            margin: 10px;
+            max-width: 30%;
+        }
+        .room-card img {
+            width: 100%;
+            height: auto;
+        }
+        .room-card button {
+            margin-top: 10px;
+            width: 100%;
+        }
+        .services-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .about-cards {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin-bottom: 20px;
+        }
+        .about-card {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px;
+            background-color: #fff;
+            max-width: 30%;
+            text-align: center;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .about-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        .about-card h3 {
+            color: #2E8B57; /* Verde */
+            margin: 10px 0;
+        }
+        .navigate-buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .navigate-buttons button {
+            background-color: #2E8B57; /* Verde */
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            margin: 0 10px;
+        }
+        .navigate-buttons button:hover {
+            background-color: #1e6b47;
+        }
+    </style>
+    <script>
+        function showRooms() {
+            hideSections();
+            document.getElementById('rooms').classList.remove('hidden');
+        }
+
+        function showServices() {
+            hideSections();
+            document.getElementById('services').classList.remove('hidden');
+        }
+
+        function showContact() {
+            hideSections();
+            document.getElementById('contact').classList.remove('hidden');
+        }
+
+        function hideSections() {
+            document.getElementById('about').classList.add('hidden');
+            document.getElementById('rooms').classList.add('hidden');
+            document.getElementById('services').classList.add('hidden');
+            document.getElementById('contact').classList.add('hidden');
+        }
+
+        function showAbout() {
+            hideSections();
+            document.getElementById('about').classList.remove('hidden');
+        }
+
+        function showPreview(imageSrc) {
+            var modal = document.getElementById('previewModal');
+            var modalImg = document.getElementById('modalImage');
+            modal.style.display = "block";
+            modalImg.src = imageSrc;
+        }
+
+        function closeModal() {
+            var modal = document.getElementById('previewModal');
+            modal.style.display = "none";
+        }
+
+        function toggleRoomDetails(id) {
+            var element = document.getElementById(id);
+            if (element.classList.contains('hidden')) {
+                element.classList.remove('hidden');
+            } else {
+                element.classList.add('hidden');
+            }
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Hotel Monterey</h1>
+        <nav>
+            <ul>
+                <li><a href="#about" onclick="showAbout()">Sobre Nosotros</a></li>
+                <li><a href="#rooms" onclick="showRooms()">Habitaciones</a></li>
+                <li><a href="#services" onclick="showServices()">Servicios</a></li>
+                <li><a href="#contact" onclick="showContact()">Contacto</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="about" class="content">
+            <h2>Sobre Nosotros</h2>
+            <p>Bienvenido al Hotel Monterey, su hogar lejos de casa. Disfrute de nuestras instalaciones de lujo y servicio excepcional.</p>
+            <div class="about-cards">
+                <div class="about-card">
+                    <img src="foto1.jpeg" alt="Imagen 1">
+                    <h3><button onclick="showRooms()">Habitaciones</button></h3>
+                </div>
+                <div class="about-card">
+                    <img src="foto 2.jpeg" alt="Imagen 2">
+                    <h3> <button onclick="showServices()">Servicios</button></h3>
+                </div>
+                <div class="about-card">
+                    <img src="foto3.jpeg" alt="Imagen 3">
+                    <h3>  <button onclick="showContact()">Contacto</button></h3>
+                </div>
+            </div>
+          
+            <div class="navigate-buttons">
+            </div>
+        </section>
+        <section id="rooms" class="content hidden">
+            <h2>
+                Habitaciones
+                <button onclick="showAbout()">Volver</button>
+            </h2>
+            <p>
+                Nota:Para reservarcion e informacion de pago es necesario realizar contacto con nosotros
+            </p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo de habitación</th>
+                            <th>Número de personas</th>
+                            <th>Vista Previa</th>
+                            <th>Servicios</th>
+                            <th>Contáctenos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Habitación con balcón<br>1 cama doble y con mirador</td>
+                            <td>2</td>
+                           
+                            <td><button onclick="showPreview('balcon.png')">Vista Previa</button></td>
+                            <td><button onclick="showServices()">Servicios</button></td>
+                            <td><button onclick="showContact()">Contáctenos</button></td>
+                        </tr>
+                        <tr>
+                            <td>Habitación semidoble<br>1 cama semidoble</td>
+                            <td>2</td>
+                          
+                            <td><button onclick="showPreview('semidoble.png')">Vista Previa</button></td>
+                            <td><button onclick="showServices()">Servicios</button></td>
+                            <td><button onclick="showContact()">Contáctenos</button></td>
+                        </tr>
+                        <tr>
+                            <td>Habitación triple<br>1 cama semidoble y 1 litera</td>
+                            <td>3</td>
+                         
+                            <td><button onclick="showPreview('camatriple.png')">Vista Previa</button></td>
+                            <td><button onclick="showServices()">Servicios</button></td>
+                            <td><button onclick="showContact()">Contáctenos</button></td>
+                        </tr>
+                        <tr>
+                            <td>Habitación Individual<br>1 cama individual</td>
+                            <td>1</td>
+                            
+                            <td><button onclick="showPreview('camasen.png')">Vista Previa</button></td>
+                            <td><button onclick="showServices()">Servicios</button></td>
+                            <td><button onclick="showContact()">Contáctenos</button></td>
+                        </tr>
+                        <tr>
+                            <td>Habitación Doble<br>1 cama doble</td>
+                            <td>2</td>
+                            
+                            <td><button onclick="showPreview('camadoble.png')">Vista Previa</button></td>
+                            <td><button onclick="showServices()">Servicios</button></td>
+                            <td><button onclick="showContact()">Contáctenos</button></td>
+                        </tr>
+                        <tr>
+                            <td>Habitación suite<br>1 cama doble</td>
+                            <td>2</td>
+                            
+                            <td><button onclick="showPreview('suitefoto.jpeg')">Vista Previa</button></td>
+                            <td><button onclick="showServices()">Servicios</button></td>
+                            <td><button onclick="showContact()">Contáctenos</button></td>
+                        </tr>
+                        <tr>
+                            <td>Habitación doble cama<br>1 cama doble</td>
+                            <td>2</td>
+                            
+                            <td><button onclick="showPreview('doblecama.png')">Vista Previa</button></td>
+                            <td><button onclick="showServices()">Servicios</button></td>
+                            <td><button onclick="showContact()">Contáctenos</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section id="services" class="content hidden">
+                <h2>
+                    Servicios
+                    <button onclick="showAbout()">Volver</button>
+                </h2>
+                <p>Disfrute de una gama de servicios de primer nivel</p>
+                
+                <div class="services-container">
+                    <div class="service-item">
+                        <div class="service-text">
+                            <h3>WiFi</h3>
+                            <p>El WiFi en nuestro hotel es de alta velocidad, permitiéndole mantenerse conectado con sus seres queridos o continuar con sus tareas de trabajo. Disponemos de una excelente cobertura en todas las áreas del hotel, incluyendo las habitaciones y zonas comunes.</p>
+                        </div>
+                        <div class="service-image img">
+                            <img src="wifi.jpeg" alt="WiFi" style="width: 100%; height: auto;">
+                        </div>
+                    </div>
+                    
+                    <div class="service-item">
+                        <div class="service-image img">
+                            <img src="tv.jpeg" alt="Televisión" style="width: 100%; height: auto;">
+                        </div>
+                        <div class="service-text">
+                            <h3>Televisión</h3>
+                            <p>Cada habitacion cuenta con una televisión para que disfrute de su uso y se pueda entretener mientras se encuentra hospedado en nuestro hotel, su uso esta disponible todo el tiempo en el que usted se hospede. </p>
+                        </div>
+                    </div>
+            
+                    <div class="service-item">
+                        <div class="service-text">
+                            <h3> Baño privado</h3>
+                            <p> Todas nuestras habitaciones incluyen un baño privado completamente equipado con amenidades de lujo. Disfrute de un espacio cómodo y privado, con duchas de agua caliente,su uso wstara disponible todo el tiempo el que usted necesite.</p>
+                        </div>
+                        <div class="service-image img">
+                            <img src="ba.png" alt="Baño Privado" style="width: 100%; height: auto;">
+                        </div>
+                    </div>
+            
+                    <div class="service-item">
+                        <div class="service-image img">
+                            <img src="agua caliente.png" alt="Agua Caliente" style="width: 100%; height: auto;">
+                        </div>
+                        <div class="service-text">
+                            <h3>Agua caliente</h3>
+                            <p>Relájese después de un largo día con una ducha de agua caliente en nuestros baños privados. Ofrecemos un sistema de calentamiento de agua eficiente que garantiza agua caliente las 24 horas del día.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="contact" class="content hidden">
+                <h2>
+                    Contacto
+                    <button onclick="showAbout()">Volver</button>
+                </h2>
+                <p>
+                    Nota:Para reservarcion e informacion de pago es necesario realizar contacto con nosotros
+                </p>
+                <div class="contact-section">
+                    <div class="contact-info">
+                      <p><strong>Dirección:</strong> Calle 9 No.4-18, Riosucio, Caldas, Colombia</p>
+                      <p><strong>Teléfono:</strong> +57 317 5130751</p>
+                      <p><strong>Email:</strong> <a href="mailto:hotelmonterreyriosucio@hotmail.com">hotelmonterreyriosucio@hotmail.com</a></p>
+                    </div>
+                    
+                    <div class="social-media">
+                      <a href="#"><i class="fa fa-instagram"></i></a>
+                      <a href="#"><i class="fa fa-facebook"></i> </a>
+                      
+                    </div>
+                    
+                    <div class="map">
+                       <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248.24820633683166!2d-75.70512966331827!3d5.421331123379787!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e47078578ee3005%3A0x5084afe6db4657ed!2sHotel%20Monterrey%20Riosucio!5e0!3m2!1ses-419!2sco!4v1727987675615!5m2!1ses-419!2sco" width="50%" height="600" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                    </div>
+                  </div>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2024 Hotel Monterey. Todos los derechos reservados.</p>
+        </footer>
+        
+        <div id="previewModal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <img id="modalImage" src="">
+            </div>  
+        </div>
+    </body>
+    </html>
